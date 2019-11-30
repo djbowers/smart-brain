@@ -6,3 +6,12 @@
   display: flex;
   justify-content: center;
 }
+
+.Particles {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: ;
+  left: 0;
+  z-index: -1;
+}
