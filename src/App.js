@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
-import Particles from 'react-particles-js';
-import Clarifai from 'clarifai';
-import Navigation from './components/Navigation/Navigation';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import Logo from './components/Logo/Logo';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Rank from './components/Rank/Rank';
 import './App.css';
 import 'tachyons';
+
+import React, { Component } from 'react';
+
+import Clarifai from 'clarifai';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Logo from './components/Logo/Logo';
+import Navigation from './components/Navigation/Navigation';
+import Particles from 'react-particles-js';
+import Rank from './components/Rank/Rank';
 
 const app = new Clarifai.App({
   apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
