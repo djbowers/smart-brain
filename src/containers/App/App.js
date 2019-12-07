@@ -4,14 +4,14 @@ import 'tachyons';
 import React, { Component } from 'react';
 
 import Clarifai from 'clarifai';
-import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
-import Logo from './components/Logo/Logo';
-import Navigation from './components/Navigation/Navigation';
+import FaceRecognition from '../../components/FaceRecognition/FaceRecognition';
+import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
+import Logo from '../../components/Logo/Logo';
+import Navigation from '../../components/Navigation/Navigation';
 import Particles from 'react-particles-js';
-import Rank from './components/Rank/Rank';
-import Register from './components/Register/Register';
-import Signin from './components/Signin/Signin';
+import Rank from '../../components/Rank/Rank';
+import Register from '../../components/Register/Register';
+import Signin from '../../components/Signin/Signin';
 
 const app = new Clarifai.App({
   apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
