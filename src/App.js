@@ -31,7 +31,7 @@ const particlesOptions = {
 
 const initialState = {
   input: '',
-  imageURL: '',
+  imageUrl: '',
   box: {},
   route: 'signin',
   isSignedIn: false,
@@ -49,7 +49,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = initialState;
-  
   }
 
   loadUser = (user) => {
@@ -84,9 +83,12 @@ class App extends Component {
     this.setState({input: event.target.value});
   }
 
-  onPhotoSubmit = () => {
-    this.setState({imageURL: this.state.input});
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+  onImageSubmit = () => {
+    const imageUrl = this.state.input;
+    // TODO add input validation for imageUrl
+
+    this.setState({ imageUrl: imageUrl });
+    app.models.predict(Clarifai.FACE_DETECT_MODEL, imageUrl)
       .then(response => {
         if (response) {
           fetch('http://localhost:3000/image', {
@@ -117,7 +119,7 @@ class App extends Component {
   }
 
   render() {
-    const { isSignedIn, imageURL, route, box, user } = this.state;
+    const { isSignedIn, imageUrl, route, box, user } = this.state;
     return (
       <div className="App">
         <Particles className="Particles" params={particlesOptions} />
@@ -126,8 +128,8 @@ class App extends Component {
           ? <div>
               <Logo />
               <Rank name={user.name} entries={user.entries} />
-              <ImageLinkForm onInputChange={this.onInputChange} onPhotoSubmit={this.onPhotoSubmit} />
-              <FaceRecognition box={box} imageURL={imageURL} />
+              <ImageLinkForm onInputChange={this.onInputChange} onImageSubmit={this.onImageSubmit} />
+              <FaceRecognition box={box} imageUrl={imageUrl} />
             </div>
           : ( route === 'signin'
               ? <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
