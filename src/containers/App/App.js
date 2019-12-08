@@ -3,6 +3,7 @@ import 'tachyons';
 
 import React, { Component } from 'react';
 
+import { BACKEND_URL } from '../../config';
 import FaceRecognition from '../../components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
 import Logo from '../../components/Logo/Logo';
@@ -84,14 +85,14 @@ class App extends Component {
     // TODO add input validation for imageUrl
 
     this.setState({ imageUrl });
-    fetch('http://localhost:3000/imageurl', {
+    fetch(`${BACKEND_URL}/imageurl`, {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ imageUrl })
     }).then(response => response.json())
       .then(response => {
         if (response) {
-          fetch('http://localhost:3000/image', {
+          fetch(`${BACKEND_URL}/image`, {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
