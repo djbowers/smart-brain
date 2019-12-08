@@ -3,7 +3,6 @@ import 'tachyons';
 
 import React, { Component } from 'react';
 
-import Clarifai from 'clarifai';
 import FaceRecognition from '../../components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from '../../components/ImageLinkForm/ImageLinkForm';
 import Logo from '../../components/Logo/Logo';
@@ -12,10 +11,6 @@ import Particles from 'react-particles-js';
 import Rank from '../../components/Rank/Rank';
 import Register from '../../components/Register/Register';
 import Signin from '../../components/Signin/Signin';
-
-const app = new Clarifai.App({
-  apiKey: process.env.REACT_APP_CLARIFAI_API_KEY
-});
 
 const particlesOptions = {
   particles: {
@@ -84,23 +79,27 @@ class App extends Component {
   }
 
   onImageSubmit = () => {
-    const imageUrl = this.state.input;
+    const { user, input } = this.state;
+    const imageUrl = input;
     // TODO add input validation for imageUrl
 
-    this.setState({ imageUrl: imageUrl });
-    app.models.predict(Clarifai.FACE_DETECT_MODEL, imageUrl)
+    this.setState({ imageUrl });
+    fetch('http://localhost:3000/imageurl', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ imageUrl })
+    }).then(response => response.json())
       .then(response => {
         if (response) {
           fetch('http://localhost:3000/image', {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              id: this.state.user.id
+              id: user.id
             })
-          })
-            .then(response => response.json())
+          }).then(response => response.json())
             .then(count => {
-              this.setState(Object.assign(this.state.user, { entries: count }))
+              this.setState(Object.assign(user, { entries: count }))
             })
             .catch(console.log)
         }
