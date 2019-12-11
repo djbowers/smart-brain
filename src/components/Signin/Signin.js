@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { BACKEND_URL } from '../../config';
+
 class Signin extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +20,7 @@ class Signin extends Component {
   }
 
   onSubmitSignIn = () => {
-    fetch('http://localhost:3000/signin', {
+    fetch(new URL('/signin', BACKEND_URL), {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

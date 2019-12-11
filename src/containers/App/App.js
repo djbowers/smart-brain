@@ -85,14 +85,14 @@ class App extends Component {
     // TODO add input validation for imageUrl
 
     this.setState({ imageUrl });
-    fetch(`${BACKEND_URL}/imageurl`, {
+    fetch(new URL('/imageurl', BACKEND_URL), {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ imageUrl })
     }).then(response => response.json())
       .then(response => {
         if (response) {
-          fetch(`${BACKEND_URL}/image`, {
+          fetch(new URL('/image', BACKEND_URL), {
             method: 'put',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
